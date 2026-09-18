@@ -1,0 +1,61 @@
+name: Publish production and staging
+
+on:
+  push:
+    branches: [main, production]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Serialize the whole build/deploy cycle. Read both current branch heads only
+# after acquiring this lock, so queued runs cannot republish stale snapshots.
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout staging and deployment tools
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          path: staging-source
+          persist-credentials: false
+      - name: Checkout production
+        uses: actions/checkout@v5
+        with:
+          ref: production
+          path: production-source
+          persist-credentials: false
+      - name: Install Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.22.1
+          fallback: none
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Test site and deployment assembly
+        run: make -C staging-source test
+      - name: Build both branch snapshots
+        run: >-
+          make -C staging-source assemble
+          PRODUCTION_SOURCE="$GITHUB_WORKSPACE/production-source"
+          STAGING_SOURCE="$GITHUB_WORKSPACE/staging-source"
+          OUTPUT_DIR="$RUNNER_TEMP/pages"
+      - name: Verify assembled artifact
+        run: make -C staging-source verify-artifact OUTPUT_DIR="$RUNNER_TEMP/pages"
+      - name: Upload combined site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/pages
+      - name: Deploy combined site
+        id: deployment
+        uses: actions/deploy-pages@v4

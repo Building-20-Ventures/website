@@ -1,0 +1,45 @@
+$paper: #fcf9f2;
+$ink: #242320;
+$red: #a31f35;
+
+* { box-sizing: border-box; }
+html, body { background: $paper; color: $ink; }
+body { display: flex; flex-direction: column; font-family: "Rubik", Arial, sans-serif; }
+main { min-height: 0; }
+a { text-underline-offset: .22em; }
+a:focus-visible { outline: 2px solid $red; outline-offset: 6px; }
+.shell { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+.brand { display: block; width: 142px; height: 116px; overflow: hidden; }
+.brand img { display: block; width: 142px; height: 142px; margin-top: -13px; }
+.site-nav { background: transparent; gap: 38px; align-items: center; }
+.site-nav a { color: $ink; padding: 12px 0; font-size: 14px; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: $red; background: transparent; text-decoration: underline; }
+.billboard { flex: 1; }
+.intro { padding: 54px 0 44px; border-top: 1px solid #d7d1c6; }
+.eyebrow { color: $red; font-size: 12px; text-transform: uppercase; letter-spacing: .18em; }
+h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(54px, 7.4vw, 102px); letter-spacing: -.055em; line-height: 1.02; margin: 22px 0 0; }
+h1 em { font-family: inherit; font-weight: 400; font-style: italic; color: $red; }
+.banner { margin: 0; }
+.banner > img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: cover; object-position: center 56%; }
+.banner figcaption { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0 30px; font-size: 11px; color: #635f57; }
+.banner figcaption a { color: inherit; }
+.site-footer { display: flex; padding: 25px 0; margin-top: 36px; border-top: 1px solid #d7d1c6; background: transparent; color: #635f57; font-size: 11px; }
+.content-page { flex: 1; padding-block: 70px 140px; border-top: 1px solid #d7d1c6; }
+.content-page h1 { font-size: clamp(48px, 7vw, 76px); }
+.prose { margin-top: 40px; line-height: 1.7; }
+.skip-link { position: absolute; left: 16px; top: -100px; padding: 12px; background: $paper; z-index: 10; }
+.skip-link:focus { top: 12px; }
+.staging-notice { background: $red; color: $paper; padding: 9px 16px; text-align: center; font-size: 12px; }
+.staging-notice a { color: inherit; }
+@media (max-width: 600px) {
+  .shell { width: calc(100% - 40px); }
+  .brand { width: 106px; height: 90px; }
+  .brand img { width: 106px; height: 106px; margin-top: -8px; }
+  .site-nav { gap: 18px; }
+  .site-nav a { font-size: 12px; }
+  .intro { padding: 40px 0 32px; }
+  .banner > img { aspect-ratio: 1.2; object-fit: cover; }
+  .banner figcaption { font-size: 10px; flex-wrap: wrap; }
+  .site-footer { margin-top: 12px; line-height: 1.6; }
+}

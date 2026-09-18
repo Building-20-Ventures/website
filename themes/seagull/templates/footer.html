@@ -1,0 +1,33 @@
+<footer>
+    <div class="social">
+        {%- for link in config.extra.social.link -%}
+        <a rel="me" href="{{link.url}}"><div><img alt="{{link.name}}" class="icon" src="{{link.img}}"/> <span>{{link.name}}</span></div></a>
+        {% endfor -%}
+    </div>
+
+    <div>
+        <div>{{i::place(color="white", size="20px")}} 123 Seagull avenue, Ocean</div> 
+        <div>{{i::metro(color="white", size="20px")}} Sea subway (42 min by foot)</div>
+        <div>{{i::bus(color="white", size="20px")}} Sand bus station</div>
+        <div>{{i::velo(color="white", size="20px")}} Bike is nice</div>
+    </div>
+
+    <div>
+        {% for link in config.extra.footer.links %}
+            {#- hack to get page or section #}
+            {%- if link is ending_with("_index.md") -%}
+            {%- set s = get_section(path=link) -%}
+                <div><a href="{{ s.permalink }}">{{s.title | safe}}</a></div>
+            {%- else -%}
+            {%- set p = get_page(path=link) -%}
+                <div><a href="{{ p.permalink }}">{{p.title | safe}}</a></div>
+            {%- endif -%}
+        {% endfor %}
+    </div>
+
+    <div>
+        <p>Website made with <a href="https://www.getzola.org/">Zola</a> and <a href="https://git.lacontrevoie.fr/HugoTrentesaux">seagull theme</a></p>
+        <p>© Content under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a> licence</p>
+        <p><a href="https://trentesaux.fr/">{{i::external_link(color="white", size="16px")}} Give in Ğ1</a> <input type="color" value="#1b317a" style="border: none; padding:0; height: 2em; width: 2em; margin-top: -1em; position: relative; top: 0.5em;"/></p>
+    </div>
+</footer>

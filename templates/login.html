@@ -1,0 +1,5 @@
+{% extends "index.html" %}
+{% block extrahead %}<meta http-equiv="refresh" content="0; url={{ config.extra.workspace_login }}">{% endblock extrahead %}
+{% block content %}
+<main id="main" class="content-page shell"><h1>Login</h1><p><a href="{{ config.extra.workspace_login }}">Continue to Building 20 Ventures Google Workspace →</a></p></main>
+{% endblock content %}
