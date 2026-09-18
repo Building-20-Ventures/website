@@ -1,0 +1,107 @@
+{% extends "index.html" %}
+
+{% block keywords %}
+<meta name="keywords" content="Seagull, Zola, Theme">{% endblock keywords %}
+
+{% block header %}
+<div class="hero hero-home col center" style="background-image: url(/img/seagulls.jpg); min-height: 60vh;">
+    <h1>Seagull demo website</h1>
+</div>
+{% endblock header %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="/css/mastodon-timeline.css">
+<script src="/javascript/mastodon-timeline.js"></script>
+{% endblock extrahead %}
+
+{% block content %}
+<main>
+    <div class="page">
+
+        <div class="textimage" style="min-height: 30vh;">
+            <img alt="logo" src="/img/gull.svg" style="max-width: 200px;" />
+            <div class="quote">
+                <q>Seagull is my most complete Zola theme</q>
+                <p>The author</p>
+            </div>
+        </div>
+
+        <div class="col center">
+            <div style="max-width: min(95vw, 600px);">
+                <p>Seagull is a Zola theme designed for complete websites. It has a lot of features and a lot of customization options.</p>
+                <p>The theme was designed in parallel on <a href="https://scientifiquesenrebellion.fr/">Scientifiques en Rebellion</a> website and <a href="https://labasetoulouse.fr/">La BASE Toulouse</a> website. It was then <em>refactored</em> into a single theme to make maintainance easier.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero" style="background-image:url(/img/seagulls.jpg);">
+        <div class="col center" style="background-color: rgba(0, 0, 0, 0.5); padding: 2em; color: white;">
+            <div style="max-width: 800px; background-color: rgba(222, 245, 255, 1); border-radius: 100%;">
+                <img src="/img/gull.svg"/>
+            </div>
+            <h3 style="margin-bottom: 0;">The seagull is chasing</h3>
+            <h3>she likes fish a lot</h3>
+            <a class="button button-orange" style="border-radius: 2em;" href="#">Read more</a>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="col center">
+            <div style="max-width: min(95vw, 600px);">
+                <h4>Want to know more about Zola?</h4>
+                <ul>
+                    <li>Read the official website <a href="https://www.getzola.org/">getzola.org</a></li>
+                    <li>Take a look at the <a href="https://www.getzola.org/documentation/">documentation</a></li>
+                    <li>Browse the <a href="https://zola.discourse.group/">forum</a></li>
+                    <li>Or pick a theme in the <a href="https://www.getzola.org/themes/">gallery</a></li>
+                </ul>
+
+                <h4>Contribute to this theme</h4>
+
+                <p>You can contribute to this theme by asking questions about this theme on the forum tagging <a href="https://zola.discourse.group/u/hugotrentesaux/summary">@HugoTrentesaux</a></p>
+
+                <p class="col center">
+                    <a class="button button-main" href="https://git.lacontrevoie.fr/HugoTrentesaux/seagull">Source code</a>
+                </p>
+            </div>
+        </div>
+
+        <hr class="fade">
+    </div>
+
+    <div class="row center" style="align-items: start;">
+        <div class="col center" style="max-width: min(95vw, 900px);">
+            <h4>Last blog posts</h4>
+            {% set posts = get_section(path="blog/_index.md") -%}
+            <ul>
+                {%- for article in posts.pages | slice(end=config.extra.homepage.n_articles) %}
+                <li><a href="{{article.permalink}}">{{ article.title | safe }}</a> {{ macros::date(date=article.date, icon=false) }}</li>
+                {%- endfor %}
+            </ul>
+
+            <h4>Gull picture</h4>
+            <div class="row center">
+                <img alt="map" src="/img/gull.svg" style="width: min(95vw, 600px);" />
+            </div>
+        </div>
+
+        <div class="col" style="max-width: min(95vw, 500px);">
+            <!-- script loading mastodon timeline -->
+            <div class="mt-timeline">
+                <div id="mt-body" class="mt-body" role="feed">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+
+</main>
+{% endblock content %}

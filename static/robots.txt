@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /staging/
+Sitemap: https://building20.vc/sitemap.xml

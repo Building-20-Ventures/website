@@ -1,0 +1,12 @@
+base_url = "https://building20.vc"
+title = "Building 20 Ventures"
+description = "Building 20 Ventures, LLC"
+default_language = "en"
+theme = "seagull"
+compile_sass = true
+minify_html = true
+build_search_index = false
+
+[extra]
+name = "Building 20 Ventures"
+workspace_login = "https://mail.google.com/a/building20.vc"
