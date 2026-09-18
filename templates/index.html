@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ config.default_language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page %}{{ page.title }} · {% endif %}{{ config.title }}</title>
+  <meta name="description" content="{{ config.description }}">
+  {% if config.base_url is containing("/staging") %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  {% if page %}<link rel="canonical" href="{{ page.permalink }}">{% elif section %}<link rel="canonical" href="{{ section.permalink }}">{% endif %}
+  <meta property="og:title" content="{{ config.title }}">
+  <meta property="og:description" content="{{ config.description }}">
+  <meta property="og:image" content="{{ get_url(path='art/Serendipity_turning-points-serendipity.webp') }}">
+  <meta name="theme-color" content="#fcf9f2">
+  <link rel="icon" type="image/png" href="{{ get_url(path='art/3.png') }}">
+  <link rel="stylesheet" href="{{ get_url(path='combine.css') }}">
+  <link rel="stylesheet" href="{{ get_url(path='site.css') }}">
+  {% block extrahead %}{% endblock extrahead %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% if config.base_url is containing("/staging") %}<div class="staging-notice">Staging preview · <a href="https://building20.vc/">Visit production</a></div>{% endif %}
+  <header class="site-header shell">
+    <a class="brand" href="{{ get_url(path='/') }}" aria-label="Building 20 Ventures home"><img src="{{ get_url(path='art/3.png') }}" alt="Building 20 Ventures" width="500" height="500"></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {% for item in ["about", "contact", "login"] %}
+      <a href="{{ get_url(path=item ~ '/') }}"{% if page and page.slug == item %} aria-current="page"{% endif %}>{{ item | capitalize }}</a>
+      {% endfor %}
+    </nav>
+  </header>
+  {% block content %}{% endblock content %}
+  <footer class="site-footer shell"><span>© 2026 Building 20 Ventures, LLC.</span></footer>
+</body>
+</html>
