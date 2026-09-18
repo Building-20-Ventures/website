@@ -1,0 +1,6 @@
+.DS_Store
+.tmp/
+public/
+static/art/
+__pycache__/
+
