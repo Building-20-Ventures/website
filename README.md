@@ -62,6 +62,11 @@ Run `make serve PORT=1113` for a local Zola preview at `http://127.0.0.1:1113/`.
 
 ## Deployment
 
+`/stage/` redirects to `/staging/` with an HTML refresh and a fallback link.
+The alias is added when the combined Pages artifact is assembled, so merging
+this change into `main` enables it even while `production` stays on an older
+revision. GitHub Pages also resolves `/stage` to `/stage/`.
+
 `.github/workflows/pages.yml` runs on every push to `main` or `production`, or
 on a manual dispatch. Both branches must exist. It checks out the current
 `production` branch for the root site and current `main` for `/staging/`, builds
