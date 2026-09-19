@@ -1,15 +1,24 @@
 .DEFAULT_GOAL := build
 ZOLA ?= zola
 PYTHON ?= python3
+UV_CACHE_DIR ?= .tmp/uv-cache
 BASE_URL ?= https://building20.vc
 OUTPUT_DIR ?= public
+PORT ?= 1111
 PRODUCTION_SOURCE ?= .
 STAGING_SOURCE ?= .
 
-.PHONY: assets build staging check test preview serve clean assemble verify-artifact
+.PHONY: assets logo-assets building-assets build staging check test preview serve clean assemble verify-artifact
 assets:
 	mkdir -p static/art
-	cp art/3.png art/Serendipity_turning-points-serendipity.webp static/art/
+	cp art/B20V-logo.png art/B20V-grid.png art/Serendipity_turning-points-serendipity.webp art/Building-20-transparent.png static/art/
+
+# Optional authoring step; deployment consumes the checked-in PNGs.
+logo-assets:
+	UV_CACHE_DIR="$(UV_CACHE_DIR)" uv run --no-project --with pillow==12.3.0 python scripts/extract_logo.py
+
+building-assets:
+	UV_CACHE_DIR="$(UV_CACHE_DIR)" uv run --no-project --with pillow==12.3.0 python scripts/extract_building.py
 
 build: assets
 	$(ZOLA) build --base-url "$(BASE_URL)" --output-dir "$(OUTPUT_DIR)" --force
@@ -45,7 +54,7 @@ preview:
 	$(PYTHON) -m http.server 1111 --bind 127.0.0.1 --directory .tmp/preview
 
 serve: assets
-	$(ZOLA) serve --interface 127.0.0.1
+	$(ZOLA) serve --interface 127.0.0.1 --port $(PORT)
 
 clean:
 	rm -rf public .tmp/production .tmp/staging .tmp/preview static/art

@@ -26,10 +26,39 @@ are in `templates/` and `sass/`. The login page redirects to
 `https://mail.google.com/a/building20.vc`; change `extra.workspace_login` in
 `config.toml` if another Workspace application is preferred.
 
-Original images remain in `art/`. `make` copies them unchanged into generated
-`static/art/` before building. `art/3.png` has background RGB **252, 249, 242**
-(`#FCF9F2`), measured at all four corners and as its dominant pixel color;
-the site uses that exact color. The banner credits the MIT Museum.
+Original images remain in `art/`. `make` copies the website assets unchanged
+into generated `static/art/` before building. The new logo assets are:
+
+- `B20V-with-grid.png`: the original supplied PNG, preserved byte for byte.
+- `B20V-without-grid.png`: the full-size logo with transparent background and
+  grid removed, preserving the original lettering, linework, and colors.
+- `B20V-logo.png`: the same transparent logo cropped with 12px padding for the
+  header and favicon.
+- `B20V-grid.png`: a seamless 500px square tile sampled from the original,
+  containing eleven cells per side (approximately 45.45px each).
+
+Every page uses the grid over **RGB 245, 245, 247 (`#F5F5F7`)**, the measured
+source background color, as requested after inspection. The strongest grid
+lines are RGB 227, 232, 237 (`#E3E8ED`). The two long horizontal guide lines
+are excluded from both the repeating tile and transparent logo.
+
+To regenerate the derived PNGs, run `make logo-assets` (requires `uv`; Pillow
+12.3.0 is installed in an isolated environment). `scripts/extract_logo.py`
+samples the exact repeating background and estimates edge transparency from
+the original logo palette; it does not redraw the logo. This extraction is
+specific to the supplied 1600 × 873 source image. Ordinary builds and deployments
+use the committed assets and do not require Pillow. The previous `3.png` is kept
+as an original asset. The banner credits the MIT Museum.
+
+The homepage uses `art/Building-20-transparent.png`, derived from the original
+`Serendipity_turning-points-serendipity.webp`. Its hand-traced alpha mask removes
+the surrounding sky and ground so the building sits on the page grid. The
+original RGB pixels and source file are preserved; only transparency is added.
+Run `make building-assets` to regenerate it with Pillow. The full illustration
+scales to fit the page without cropping on desktop or mobile.
+
+The logo alt text is “Building 20 Ventures LLC The Foundation for Breakthroughs”.
+Run `make serve PORT=1113` for a local Zola preview at `http://127.0.0.1:1113/`.
 
 ## Deployment
 
@@ -114,5 +143,6 @@ This version works with the pinned Zola 0.22.1 toolchain; newer Seagull
 versions use different template syntax and require a coordinated upgrade.
 
 Banner: `Serendipity_turning-points-serendipity.webp`, credited to the MIT Museum.
-Company logo: `3.png`. Image rights remain with their respective owners.
+Company logo: `B20V-with-grid.png` and its derived transparent assets.
+Image rights remain with their respective owners.
 Copyright © 2026 Building 20 Ventures, LLC.
