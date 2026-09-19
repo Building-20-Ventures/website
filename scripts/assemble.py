@@ -18,6 +18,18 @@ def assemble(production: Path, staging: Path, output: Path) -> None:
         shutil.rmtree(output)
     shutil.copytree(production, output)
     shutil.copytree(staging, output / "staging")
+    # Add this at the artifact root even when production is an older revision.
+    alias = output / "stage"
+    alias.mkdir(exist_ok=True)
+    (alias / "index.html").write_text(
+        '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">\n'
+        '<title>Staging preview</title>\n'
+        '<meta name="robots" content="noindex, nofollow">\n'
+        '<meta http-equiv="refresh" content="0; url=/staging/">\n'
+        '<link rel="canonical" href="/staging/">\n'
+        '</head><body><p><a href="/staging/">Continue to staging</a></p></body></html>\n',
+        encoding="utf-8",
+    )
     (output / ".nojekyll").touch()
 
 
