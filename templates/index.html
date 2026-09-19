@@ -10,8 +10,8 @@
   <meta property="og:title" content="{{ config.title }}">
   <meta property="og:description" content="{{ config.description }}">
   <meta property="og:image" content="{{ get_url(path='art/Serendipity_turning-points-serendipity.webp') }}">
-  <meta name="theme-color" content="#fcf9f2">
-  <link rel="icon" type="image/png" href="{{ get_url(path='art/3.png') }}">
+  <meta name="theme-color" content="#f5f5f7">
+  <link rel="icon" type="image/png" href="{{ get_url(path='art/B20V-logo.png') }}">
   <link rel="stylesheet" href="{{ get_url(path='combine.css') }}">
   <link rel="stylesheet" href="{{ get_url(path='site.css') }}">
   {% block extrahead %}{% endblock extrahead %}
@@ -20,7 +20,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   {% if config.base_url is containing("/staging") %}<div class="staging-notice">Staging preview · <a href="https://building20.vc/">Visit production</a></div>{% endif %}
   <header class="site-header shell">
-    <a class="brand" href="{{ get_url(path='/') }}" aria-label="Building 20 Ventures home"><img src="{{ get_url(path='art/3.png') }}" alt="Building 20 Ventures" width="500" height="500"></a>
+    <a class="brand" href="{{ get_url(path='/') }}" aria-label="Building 20 Ventures home"><img src="{{ get_url(path='art/B20V-logo.png') }}" alt="Building 20 Ventures — The foundation for breakthroughs" width="827" height="639"></a>
     <nav class="site-nav" aria-label="Main navigation">
       {% for item in ["about", "contact", "login"] %}
       <a href="{{ get_url(path=item ~ '/') }}"{% if page and page.slug == item %} aria-current="page"{% endif %}>{{ item | capitalize }}</a>
