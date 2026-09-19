@@ -28,7 +28,7 @@ a:focus-visible { outline: 2px solid $red; outline-offset: 6px; }
 h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(54px, 7.4vw, 102px); letter-spacing: -.055em; line-height: 1.02; margin: 22px 0 0; }
 h1 em { font-family: inherit; font-weight: 400; font-style: italic; color: $red; }
 .banner { margin: 0; }
-.banner > img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: cover; object-position: center 56%; }
+.banner > img { display: block; width: 100%; height: auto; }
 .banner figcaption { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0 30px; font-size: 11px; color: #635f57; }
 .banner figcaption a { color: inherit; }
 .site-footer { display: flex; padding: 25px 0; margin-top: 36px; border-top: 1px solid #d7d1c6; background: transparent; color: #635f57; font-size: 11px; }
@@ -45,7 +45,6 @@ h1 em { font-family: inherit; font-weight: 400; font-style: italic; color: $red;
   .site-nav { gap: 18px; }
   .site-nav a { font-size: 12px; }
   .intro { padding: 40px 0 32px; }
-  .banner > img { aspect-ratio: 1.2; object-fit: cover; }
   .banner figcaption { font-size: 10px; flex-wrap: wrap; }
   .site-footer { margin-top: 12px; line-height: 1.6; }
 }

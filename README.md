@@ -50,6 +50,16 @@ specific to the supplied 1600 × 873 source image. Ordinary builds and deploymen
 use the committed assets and do not require Pillow. The previous `3.png` is kept
 as an original asset. The banner credits the MIT Museum.
 
+The homepage uses `art/Building-20-transparent.png`, derived from the original
+`Serendipity_turning-points-serendipity.webp`. Its hand-traced alpha mask removes
+the surrounding sky and ground so the building sits on the page grid. The
+original RGB pixels and source file are preserved; only transparency is added.
+Run `make building-assets` to regenerate it with Pillow. The full illustration
+scales to fit the page without cropping on desktop or mobile.
+
+The logo alt text is “Building 20 Ventures LLC The Foundation for Breakthroughs”.
+Run `make serve PORT=1113` for a local Zola preview at `http://127.0.0.1:1113/`.
+
 ## Deployment
 
 `.github/workflows/pages.yml` runs on every push to `main` or `production`, or
